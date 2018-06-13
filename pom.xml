@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.uniovi</groupId>
-	<artifactId>Starter</artifactId>
+	<artifactId>InciManager</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>Starter</name>
+	<name>InciManager</name>
 	<description>Aplicación para la gestión de incidencias.</description>
 
 	<parent>
