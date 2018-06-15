@@ -65,6 +65,14 @@ public class Operator {
 		this.name = name;
 	}
 
+	public Set<Incidencia> getIncidenciasAsignadas() {
+		return incidenciasAsignadas;
+	}
+
+	public void setIncidenciasAsignadas(Set<Incidencia> incidenciasAsignadas) {
+		this.incidenciasAsignadas = incidenciasAsignadas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

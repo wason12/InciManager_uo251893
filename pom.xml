@@ -48,7 +48,30 @@
 		 	<artifactId>h2</artifactId>		
 		 </dependency>
 		<!-- FIN DE BLOQUE -->
-		
+		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- FIN DE BLOQUE -->
+		<!-- Kafka -->
+		<dependency>
+	      <groupId>org.springframework.kafka</groupId>
+	      <artifactId>spring-kafka</artifactId>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.springframework.kafka</groupId>
+	      <artifactId>spring-kafka-test</artifactId>
+	      <scope>test</scope>
+	    </dependency>
+		<!-- FIN DE BLOQUE -->
+		<!-- JSON Parser -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!-- FIN DE BLOQUE -->
+		<!-- FIN DE BLOQUE -->
 
 	</dependencies>
 

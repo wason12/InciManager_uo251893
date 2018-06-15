@@ -1,5 +1,7 @@
 package inciManager.entities;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,40 +13,55 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Incidencia {
 	@Id
 	@GeneratedValue
+	@JsonView(Incidencia.class)
 	private long id;
 	
+	@JsonView(Incidencia.class)
 	private String identificadorAgente;
+	@JsonView(Incidencia.class)
 	private String name;
-	private String descripción;	
+	@JsonView(Incidencia.class)
+	private String descripcion;	
+	@JsonView(Incidencia.class)
 	private String urlMasInfo;
 	
 	@ElementCollection
-	private Set<String> etiquetas;
+	@JsonView(Incidencia.class)
+	private Set<String> etiquetas = new HashSet<String>();
 	@ElementCollection
-	private Map<String,String> campos;
+	@JsonView(Incidencia.class)
+	private Map<String,String> campos = new HashMap<String,String>();
 	
 	@Enumerated(EnumType.STRING)
+	@JsonView(Incidencia.class)
 	private Estado estado;
-	private Localizacion localizacion;
+	@JsonView(Incidencia.class)
+	private Localizacion localizacion = new Localizacion();
 	@ManyToOne
 	@JoinColumn(name="operator_id")
+	@JsonView(Incidencia.class)
 	private Operator operadorAsignado;
-	
+	@Transient
+	@JsonView(Agente.class)
+	private Agente agenteAux = new Agente();
 	
 	
 	public Incidencia() { }
 	
-	public Incidencia(String identificadorAgente, String name, String descripción, Set<String> etiquetas,
+	public Incidencia(String identificadorAgente, String name, String descripcion, Set<String> etiquetas,
 			Map<String, String> campos, Estado estado, Localizacion localizacion) {
 		super();
 		this.identificadorAgente = identificadorAgente;
 		this.name = name;
-		this.descripción = descripción;
+		this.descripcion = descripcion;
 		this.etiquetas = etiquetas;
 		this.campos = campos;
 		this.estado = estado;
@@ -73,14 +90,6 @@ public class Incidencia {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getDescripción() {
-		return descripción;
-	}
-
-	public void setDescripción(String descripción) {
-		this.descripción = descripción;
 	}
 
 	public Set<String> getEtiquetas() {
@@ -131,11 +140,27 @@ public class Incidencia {
 		this.localizacion = localizacion;
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Agente getAgenteAux() {
+		return agenteAux;
+	}
+
+	public void setAgenteAux(Agente agenteAux) {
+		this.agenteAux = agenteAux;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descripción == null) ? 0 : descripción.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((identificadorAgente == null) ? 0 : identificadorAgente.hashCode());
 		result = prime * result + ((localizacion == null) ? 0 : localizacion.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -151,10 +176,10 @@ public class Incidencia {
 		if (getClass() != obj.getClass())
 			return false;
 		Incidencia other = (Incidencia) obj;
-		if (descripción == null) {
-			if (other.descripción != null)
+		if (descripcion == null) {
+			if (other.descripcion != null)
 				return false;
-		} else if (!descripción.equals(other.descripción))
+		} else if (!descripcion.equals(other.descripcion))
 			return false;
 		if (identificadorAgente == null) {
 			if (other.identificadorAgente != null)
@@ -172,6 +197,15 @@ public class Incidencia {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+	
+	public void setCamposLista(String str) {
+		String[] lista = str.split(",");
+		for(int i=0 ; i<lista.length ; i++) {
+			String[] campo = lista[i].split("/");
+			if(campo.length == 2)
+				campos.put(campo[0], campo[1]);
+		}	
 	}
 
 
