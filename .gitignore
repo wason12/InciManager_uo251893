@@ -50,3 +50,5 @@ hs_err_pid*
 data/bbdd\.mv\.db
 
 data/
+
+src/main/resources/static/fotossubidas/
