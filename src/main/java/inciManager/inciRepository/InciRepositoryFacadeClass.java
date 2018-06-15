@@ -19,8 +19,8 @@ public class InciRepositoryFacadeClass implements InciRepositoryFacade{
 	private OperatorRepository operatorRepo;
 	
 	@Override
-	public void saveIncidence(Incidencia incidencia) {
-		inciRepo.save(incidencia);
+	public Incidencia saveIncidence(Incidencia incidencia) {
+		return inciRepo.save(incidencia);
 	}
 
 	@Override

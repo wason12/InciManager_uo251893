@@ -7,7 +7,7 @@ import inciManager.entities.Operator;
 
 public interface InciRepositoryFacade{
 
-	public void saveIncidence(Incidencia incidencia);
+	public Incidencia saveIncidence(Incidencia incidencia);
 	public List<Operator> getOperators();
 	List<Incidencia> getIncidence(String identificador);
 	

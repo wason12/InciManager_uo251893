@@ -23,8 +23,9 @@ public class IncidenceServiceFacadeClass implements IncidenceServiceFacade {
 	
 	
 	@Override
-	public void processIncidence(Incidencia incidencia) {
+	public Incidencia processIncidence(Incidencia incidencia) {
 		Agente agente = incidencia.getAgenteAux();
+		Incidencia saved = null;
 		
 		incidencia.setEstado(Estado.ABIERTA);
 		incidencia.setIdentificadorAgente(agente.getIdentificador());
@@ -33,9 +34,11 @@ public class IncidenceServiceFacadeClass implements IncidenceServiceFacade {
 		incidencia.setOperadorAsignado(operadorConMenosTrabajo);
 		
 		if(agente.getKind() != "sensor" && agente.getKind() != "automatico")
-			repository.saveIncidence(incidencia);
+			saved = repository.saveIncidence(incidencia);
 		
 		kafka.sendIncidence(incidencia);
+		
+		return saved;
 	}
 
 	@Override
