@@ -1,7 +1,12 @@
 package inciManager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Agente {
 	
+	@JsonProperty(value="login")
 	private String identificador;
 	private String password;
 	private String kind;
