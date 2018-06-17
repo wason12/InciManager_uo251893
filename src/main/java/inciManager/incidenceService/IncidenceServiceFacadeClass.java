@@ -24,6 +24,8 @@ public class IncidenceServiceFacadeClass implements IncidenceServiceFacade {
 	
 	@Override
 	public Incidencia processIncidence(Incidencia incidencia) {
+		if(incidencia == null) return null;
+		
 		Agente agente = incidencia.getAgenteAux();
 		Incidencia saved = null;
 		
@@ -38,11 +40,13 @@ public class IncidenceServiceFacadeClass implements IncidenceServiceFacade {
 		
 		kafka.sendIncidence(incidencia);
 		
-		return saved;
+		return saved==null?incidencia:saved;
 	}
 
 	@Override
 	public List<Incidencia> getIncidenceInfo(Agente agente) {
+		if(agente == null) return null;
+		
 		return repository.getIncidence(agente.getIdentificador());
 	}
 	
