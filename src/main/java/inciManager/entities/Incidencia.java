@@ -23,39 +23,39 @@ public class Incidencia {
 	@GeneratedValue
 	@JsonView(Incidencia.class)
 	private long id;
-	
+
 	@JsonView(Incidencia.class)
 	private String identificadorAgente;
 	@JsonView(Incidencia.class)
 	private String name;
 	@JsonView(Incidencia.class)
-	private String descripcion;	
+	private String descripcion;
 	@JsonView(Incidencia.class)
 	private String urlMasInfo;
-	
+
 	@ElementCollection
 	@JsonView(Incidencia.class)
 	private Set<String> etiquetas = new HashSet<String>();
 	@ElementCollection
 	@JsonView(Incidencia.class)
-	private Map<String,String> campos = new HashMap<String,String>();
-	
+	private Map<String, String> campos = new HashMap<String, String>();
+
 	@Enumerated(EnumType.STRING)
 	@JsonView(Incidencia.class)
 	private Estado estado;
 	@JsonView(Incidencia.class)
 	private Localizacion localizacion = new Localizacion();
 	@ManyToOne
-	@JoinColumn(name="operator_id")
+	@JoinColumn(name = "operator_id")
 	@JsonView(Incidencia.class)
 	private Operator operadorAsignado;
 	@Transient
 	@JsonView(Agente.class)
 	private Agente agenteAux = new Agente();
-	
-	
-	public Incidencia() { }
-	
+
+	public Incidencia() {
+	}
+
 	public Incidencia(String identificadorAgente, String name, String descripcion, Set<String> etiquetas,
 			Map<String, String> campos, Estado estado, Localizacion localizacion) {
 		super();
@@ -156,13 +156,14 @@ public class Incidencia {
 		this.agenteAux = agenteAux;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((identificadorAgente == null) ? 0 : identificadorAgente.hashCode());
-		result = prime * result + ((localizacion == null) ? 0 : localizacion.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -186,11 +187,6 @@ public class Incidencia {
 				return false;
 		} else if (!identificadorAgente.equals(other.identificadorAgente))
 			return false;
-		if (localizacion == null) {
-			if (other.localizacion != null)
-				return false;
-		} else if (!localizacion.equals(other.localizacion))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -198,19 +194,14 @@ public class Incidencia {
 			return false;
 		return true;
 	}
-	
+
 	public void setCamposLista(String str) {
 		String[] lista = str.split(",");
-		for(int i=0 ; i<lista.length ; i++) {
+		for (int i = 0; i < lista.length; i++) {
 			String[] campo = lista[i].split("/");
-			if(campo.length == 2)
+			if (campo.length == 2)
 				campos.put(campo[0], campo[1]);
-		}	
+		}
 	}
-
-
-	
-	
-	
 
 }

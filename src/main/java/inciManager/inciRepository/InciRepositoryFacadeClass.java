@@ -10,14 +10,14 @@ import inciManager.entities.Incidencia;
 import inciManager.entities.Operator;
 
 @Repository
-public class InciRepositoryFacadeClass implements InciRepositoryFacade{
+public class InciRepositoryFacadeClass implements InciRepositoryFacade {
 
 	@Autowired
 	private IncidenceRepository inciRepo;
-	
+
 	@Autowired
 	private OperatorRepository operatorRepo;
-	
+
 	@Override
 	public Incidencia saveIncidence(Incidencia incidencia) {
 		return inciRepo.save(incidencia);
@@ -31,9 +31,9 @@ public class InciRepositoryFacadeClass implements InciRepositoryFacade{
 	@Override
 	public List<Operator> getOperators() {
 		List<Operator> aux = new ArrayList<Operator>();
-		for(Operator operator : operatorRepo.findAll())
+		for (Operator operator : operatorRepo.findAll())
 			aux.add(operator);
-		
+
 		return aux;
 	}
 

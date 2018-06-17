@@ -19,9 +19,9 @@ import inciManager.entities.Localizacion;
 import inciManager.incidenceService.IncidenceServiceFacade;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= {StarterApplication.class})
+@SpringBootTest(classes = { StarterApplication.class })
 public class IncidenceServiceTests {
-	
+
 	@Autowired
 	private IncidenceServiceFacade inciService;
 
@@ -34,14 +34,14 @@ public class IncidenceServiceTests {
 
 		Incidencia inci = new Incidencia(null, "fuego", "escripcion", etiquetas, null, null, localizacion);
 		inci.setAgenteAux(agente);
-		
+
 		Incidencia processed = inciService.processIncidence(inci);
-		
+
 		assertNull(inciService.processIncidence(null));
 		assertTrue(processed.getEstado().equals(Estado.ABIERTA));
 		assertTrue(processed.getIdentificadorAgente().equals(agente.getIdentificador()));
 		assertTrue(processed.getId() != 0);
-		
+
 		assertTrue(inciService.getIncidenceInfo(agente).contains(processed));
 	}
 

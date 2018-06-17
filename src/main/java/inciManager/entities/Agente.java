@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Agente {
-	
-	@JsonProperty(value="login")
+
+	@JsonProperty(value = "login")
 	private String identificador;
 	private String password;
 	private String kind;
-	
-	public Agente() {}
+
+	public Agente() {
+	}
 
 	public Agente(String identificador, String password, String kind) {
 		super();
@@ -69,5 +70,4 @@ public class Agente {
 		return true;
 	}
 
-	
 }

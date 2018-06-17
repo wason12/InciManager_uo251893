@@ -19,12 +19,12 @@ import inciManager.entities.Localizacion;
 import inciManager.inciRepository.*;;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= StarterApplication.class)
+@SpringBootTest(classes = StarterApplication.class)
 public class InciRepositoryTest {
-	
+
 	@Autowired
 	private InciRepositoryFacade inciRepository;
-	
+
 	@Test
 	public void testRepository() {
 		Agente agente = new Agente("agentePrueba", "pass", "agente");
@@ -34,12 +34,12 @@ public class InciRepositoryTest {
 
 		Incidencia inci = new Incidencia("id", "fuego", "escripcion", etiquetas, null, Estado.ABIERTA, localizacion);
 		inci.setAgenteAux(agente);
-		
+
 		String id = inciRepository.saveIncidence(inci).getIdentificadorAgente();
-		
+
 		assertTrue(inciRepository.getIncidence(id).contains(inci));
 		assertNotNull(inciRepository.getOperators());
-		
+
 	}
 
 }

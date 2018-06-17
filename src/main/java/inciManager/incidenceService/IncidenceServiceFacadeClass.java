@@ -17,52 +17,50 @@ public class IncidenceServiceFacadeClass implements IncidenceServiceFacade {
 
 	@Autowired
 	private InciRepositoryFacade repository;
-	
+
 	@Autowired
 	private SendIncidence kafka;
-	
-	
+
 	@Override
 	public Incidencia processIncidence(Incidencia incidencia) {
-		if(incidencia == null) return null;
-		
+		if (incidencia == null)
+			return null;
+
 		Agente agente = incidencia.getAgenteAux();
 		Incidencia saved = null;
-		
+
 		incidencia.setEstado(Estado.ABIERTA);
 		incidencia.setIdentificadorAgente(agente.getIdentificador());
-		
-		Operator operadorConMenosTrabajo = getOperadorConMenosTrabajo(repository.getOperators());		
+
+		Operator operadorConMenosTrabajo = getOperadorConMenosTrabajo(repository.getOperators());
 		incidencia.setOperadorAsignado(operadorConMenosTrabajo);
-		
-		if(agente.getKind() != "sensor" && agente.getKind() != "automatico")
+
+		if (!"sensor".equals(agente.getKind()) && !"automatico".equals(agente.getKind()))
 			saved = repository.saveIncidence(incidencia);
-		
+
 		kafka.sendIncidence(incidencia);
-		
-		return saved==null?incidencia:saved;
+
+		return saved == null ? incidencia : saved;
 	}
 
 	@Override
 	public List<Incidencia> getIncidenceInfo(Agente agente) {
-		if(agente == null) return null;
-		
+		if (agente == null)
+			return null;
+
 		return repository.getIncidence(agente.getIdentificador());
 	}
-	
-	
-	
-	
+
 	private Operator getOperadorConMenosTrabajo(List<Operator> operators) {
 		Operator menosTrabajo = null;
-		
-		if(operators.size() != 0)
+
+		if (operators.size() != 0)
 			menosTrabajo = operators.get(0);
-		
-		for(Operator operator : operators)
-			if(operator.getIncidenciasAsignadas().size() < menosTrabajo.getIncidenciasAsignadas().size())
+
+		for (Operator operator : operators)
+			if (operator.getIncidenciasAsignadas().size() < menosTrabajo.getIncidenciasAsignadas().size())
 				menosTrabajo = operator;
-		
+
 		return menosTrabajo;
 	}
 

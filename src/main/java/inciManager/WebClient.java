@@ -13,30 +13,30 @@ import inciManager.incidenceController.IncidenceControllerFacade;
 
 @Controller
 public class WebClient {
-	
+
 	@Autowired
 	private IncidenceControllerFacade incidenceController;
-	
+
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
-	
+
 	@RequestMapping("/login")
 	public String logInGet() {
 		return "login";
 	}
-	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String logInPost(@ModelAttribute Agente agente, Model modelo, @RequestParam String operation) {
 		modelo.addAttribute("agente", agente);
-		
-		if(operation.equals("add"))
-				return "incidence/add";
-		if(operation.equals("view"))
+
+		if ("add".equals(operation))
+			return "incidence/add";
+		if ("view".equals(operation))
 			return incidenceController.checkIncidence(agente, modelo);
 		else
 			return "error";
-	}	
+	}
 
 }

@@ -12,12 +12,13 @@ public class RestUtil {
 	public RestTemplate rest() {
 		return new RestTemplate();
 	}
-	
+
 	public static boolean comprobarDatos(Agente agenteAComprobar) {
 		RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8080/user", agenteAComprobar, String.class);
-        
-        return response.getStatusCode().is2xxSuccessful();
+		ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8080/user", agenteAComprobar,
+				String.class);
+
+		return response.getStatusCode().is2xxSuccessful();
 	}
 
 }

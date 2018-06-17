@@ -15,16 +15,17 @@ public class Operator {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@Column(unique = true)
 	private String email;
 	private String password;
 	private String name;
-	
+
 	@OneToMany(mappedBy = "operadorAsignado", cascade = CascadeType.ALL)
 	private Set<Incidencia> incidenciasAsignadas = new HashSet<Incidencia>();
-	
-	public Operator() {}
+
+	public Operator() {
+	}
 
 	public Operator(String email, String password, String name) {
 		super();
@@ -97,12 +98,5 @@ public class Operator {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

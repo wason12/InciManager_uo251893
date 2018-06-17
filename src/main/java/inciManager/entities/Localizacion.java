@@ -4,18 +4,18 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Localizacion {
-	
+
 	private double latitud;
 	private double longitud;
-	
-	public Localizacion() {}
+
+	public Localizacion() {
+	}
 
 	public Localizacion(double latitud, double longitud) {
 		super();
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
-
 
 	public double getLatitud() {
 		return latitud;
@@ -60,7 +60,7 @@ public class Localizacion {
 			return false;
 		return true;
 	}
-	
+
 	
 
 }
