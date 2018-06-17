@@ -6,6 +6,7 @@ after_success:
 - nohup bash -c "cd kafka && bin/kafka-server-stop.sh config/server.properties &"
 - nohup bash -c "cd kafka && bin/zookeeper-server-stop.sh config/zookeeper.properties &"
 before_script:
+- "chmod +x mvnw"
 - "export DISPLAY=:99.0"
 - "sh -e /etc/init.d/xvfb start"
 - sleep 3 # give xvfb some time to start
