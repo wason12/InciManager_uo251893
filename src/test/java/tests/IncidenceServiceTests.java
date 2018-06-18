@@ -43,6 +43,14 @@ public class IncidenceServiceTests {
 		assertTrue(processed.getId() != 0);
 
 		assertTrue(inciService.getIncidenceInfo(agente).contains(processed));
+		
+		assertNull(inciService.getIncidenceInfo(null));
+		
+		inci.getAgenteAux().setKind("sensor");
+		inci.setId(0);
+		
+		assertTrue(inciService.processIncidence(inci).getId() == 0); //No se guarda en la BBDD
+		
 	}
 
 }
