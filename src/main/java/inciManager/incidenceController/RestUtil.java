@@ -15,7 +15,7 @@ public class RestUtil {
 
 	public static boolean comprobarDatos(Agente agenteAComprobar) {
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8080/user", agenteAComprobar,
+		ResponseEntity<String> response = restTemplate.postForEntity("http://ec2-54-186-46-133.us-west-2.compute.amazonaws.com/user", agenteAComprobar,
 				String.class);
 
 		return response.getStatusCode().is2xxSuccessful();
