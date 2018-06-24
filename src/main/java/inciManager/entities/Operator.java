@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,7 +25,7 @@ public class Operator {
 	private String name;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "operadorAsignado", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "operadorAsignado", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Incidencia> incidenciasAsignadas = new HashSet<Incidencia>();
 
 	public Operator() {
