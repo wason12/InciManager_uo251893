@@ -2,6 +2,7 @@ package inciManager.incidenceController;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import inciManager.entities.Agente;
@@ -15,10 +16,16 @@ public class RestUtil {
 
 	public static boolean comprobarDatos(Agente agenteAComprobar) {
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> response = restTemplate.postForEntity("http://ec2-54-186-46-133.us-west-2.compute.amazonaws.com/user", agenteAComprobar,
-				String.class);
+		ResponseEntity<String> response;
+		
+		try {
+			response = restTemplate.postForEntity("http://localhost/user", agenteAComprobar,
+					String.class);
+		}catch(HttpClientErrorException e) {
+			return false;
+		}
 
-		return response.getStatusCode().is2xxSuccessful();
+		return response != null && response.getStatusCode().is2xxSuccessful();
 	}
 
 }
